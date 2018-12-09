@@ -8,6 +8,7 @@ PATH_TO_ESTRAVIZ = "data/estraviz_09_2017.dat"
 PATH_TO_XIADA = "data/xiada_2.6.dat"
 PATH_TO_CORGA = "data/corga_1.7.dat"
 PATH_TO_TOPONYMS = "data/toponimia_2013.dat"
+PATH_TO_TOPONYMS = "data/wikipedia_08_2017.dat"
 
 
 def _pth(datfile):
@@ -41,6 +42,10 @@ class GLToponymFilter(DictFilter):
 	def __init__(self, slug="gl_toponym", **kwargs):
 		super().__init__(file=_pth(PATH_TO_TOPONYMS), slug=slug, **kwargs)
 
+class GLWikipediaFilter(DictFilter):
+
+	def __init__(self, slug="gl_wikipedia", **kwargs):
+		super().__init__(file=_pth(PATH_TO_WIKIPEDIA), slug=slug, **kwargs)
 
 class GLStemmerFilter(BaseFilter):
 
