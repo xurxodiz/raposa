@@ -8,7 +8,7 @@ PATH_TO_ESTRAVIZ = "data/estraviz_09_2017.dat"
 PATH_TO_XIADA = "data/xiada_2.6.dat"
 PATH_TO_CORGA = "data/corga_1.7.dat"
 PATH_TO_TOPONYMS = "data/toponimia_2013.dat"
-PATH_TO_TOPONYMS = "data/wikipedia_08_2017.dat"
+PATH_TO_WIKIPEDIA = "data/wikipedia_08_2017.dat"
 
 
 def _pth(datfile):
