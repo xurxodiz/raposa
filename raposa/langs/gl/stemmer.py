@@ -1,4 +1,4 @@
-from ...core.rule import Rule
+from ...core.stemming.rule import Rule
 
 class GLSimpleStemmer():
 
@@ -30,9 +30,9 @@ class GLSimpleStemmer():
         self.s = self.s.translate(self.m)
 
 
-    def stem(self, word):
+    def stem(self, unit):
 
-        self.s = word.lower()
+        self.s = unit.lower()
         self.suffixes = []
 
         if self.s.endswith("s") and len(self.s) >= 3:
@@ -56,7 +56,7 @@ class GLSimpleStemmer():
 
         # loop on the first element
         # this is the only extra thing added from the original
-        if (self.s != word.lower()):
+        if (self.s != unit.lower()):
            new_chain = self.stem(self.s)
            chain = new_chain + chain[1:]
 

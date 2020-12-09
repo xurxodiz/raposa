@@ -1,7 +1,7 @@
 import os
 
-from ...filters.basic import BaseFilter, DictFilter
-from .stemming import GLSimpleStemmer
+from ...core.tubes import BasicTube, DictFilter
+from .stemmer import GLSimpleStemmer
 
 
 PATH_TO_ESTRAVIZ = "data/estraviz_09_2017.dat"
@@ -42,19 +42,31 @@ class GLToponymFilter(DictFilter):
 	def __init__(self, slug="gl_toponym", **kwargs):
 		super().__init__(file=_pth(PATH_TO_TOPONYMS), slug=slug, **kwargs)
 
+
 class GLWikipediaFilter(DictFilter):
 
 	def __init__(self, slug="gl_wikipedia", **kwargs):
 		super().__init__(file=_pth(PATH_TO_WIKIPEDIA), slug=slug, **kwargs)
 
-class GLStemmerFilter(BaseFilter):
 
-	def __init__(self, slug="gl_stemmer", discard=False, **kwargs):
+class GLStemmerFilter(BasicTube):
+
+	def __init__(self, slug="gl_stemmer", discard=False, replace=False, **kwargs):
 		self._stemmer = GLSimpleStemmer()
+		self._replace = replace
 		super().__init__(slug=slug, discard=discard, **kwargs)
 
 
-	def _process(self, word):
-		chain = self._stemmer.stem(word["val"])
-		word["t_"+self.slug+"_val"] = chain
-		return False
+	def _process(self, unit):
+		v = unit if type(unit) == str else unit["val"]
+		chain = self._stemmer.stem(v)
+		if self._tag:
+			unit["t_"+self.slug+"_val"] = chain
+		if self._replace:
+			if type(unit) == str:
+				return chain[0]
+			else:
+				unit["val"] = chain[0]
+				return unit
+		else:
+			return unit

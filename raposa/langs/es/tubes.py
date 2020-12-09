@@ -1,6 +1,6 @@
 import os
 
-from ...filters.basic import DictFilter, ComboFilter
+from ...core.tubes import DictFilter
 
 
 PATH_TO_DRAE = "data/drae_2011.dat"
@@ -32,13 +32,3 @@ class ESLastNamesFilter(DictFilter):
 
 	def __init__(self, slug="es_lastnames", **kwargs):
 		super().__init__(file=_pth(PATH_TO_LAST_NAMES), slug=slug, **kwargs)
-
-
-class ESNamesFilter(ComboFilter):
-
-	def __init__(self, slug="es_names", **kwargs):
-		lst_filters = [
-			ESFirstNamesFilter(),
-			ESLastNamesFilter()
-		]
-		super().__init__(lst_filters, slug=slug, **kwargs)

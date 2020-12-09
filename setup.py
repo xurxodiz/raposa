@@ -2,20 +2,19 @@ from distutils.core import setup
 
 setup(
     name = 'raposa',
-    version = '0.1',
+    version = '0.2',
     description = 'Lexicological framework for pipeline text processing',
     long_description = """
         RAPOSA processes texts word by word and applies different filters
         in a conveyor-belt like fashion.
 
-        Each filter first adds its own tags to each word according to
-        their specific purpose, and then may decide to discard the word
-        altogether after evaluating the tags present.
-
-        The words that reach the end of this pipeline are output along
-        with their tags and context information. The particular set
-        of filters and their order of application is chosen by the user
-        from the available pool in each run.
+        Define a pipeline, with its tokenization method, and the different
+        tubes through which the tokens will travel. Tubes may modify
+        the token, discard it, tag it, or any combination of those three.
+        Some basic pipelines and tubes are included, but every case
+        is different, so customization was the key guiding principle.
+        As such, we encourage to check the `demo.py` file and the code
+        itself to know how to create and combine your own derived classes.
 
         The intended use case for RAPOSA is lexicology analysis,
         being of special convenience for neology, lexicography
