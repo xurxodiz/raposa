@@ -28,7 +28,7 @@ class BasicTokenizer():
 class WhitespaceTokenizer(BasicTokenizer):
 
 	def _process(self, text):
-		return ctxt.split()
+		return text.split()
 
 
 class NewlineTokenizer(BasicTokenizer):
